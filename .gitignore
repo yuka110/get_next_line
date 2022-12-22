@@ -1,0 +1,5 @@
+.DS_Store
+*.out
+*.o
+get_next_line.a
+test.txt

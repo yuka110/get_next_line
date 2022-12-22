@@ -6,12 +6,27 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 09:47:19 by yitoh         #+#    #+#                 */
-/*   Updated: 2022/12/21 17:28:11 by yitoh         ########   odam.nl         */
+/*   Updated: 2022/12/22 16:41:11 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "get_next_line.h"
+
+
+// char	*more_chr(char	*pre, char *buf)
+// {
+// 	char	*extra;
+// 	char	*joint;
+
+// 	extra = ft_substr(buf, 0, BUFFER_SIZE);
+// 	joint = ft_strjoin(pre, extra);
+// 	return (joint);
+// }
+
 
 char	*get_next_line(int fd)
 {
@@ -19,28 +34,61 @@ char	*get_next_line(int fd)
 	ssize_t		len;
 	int			i;
 	char		*comp;
-	char		*extra;
+	char		*tiny;
 
 	i = 0;
-	len = read(fd, buf, BUFFER_SIZE);
-	while (len)
+	comp = malloc (sizeof(char) * BUFFER_SIZE);
+		if (!comp)
+			free(comp);
+	while (i == 0)
 	{
-		i = ft_strchr(buf, '\n');
+		len = read(fd, buf, BUFFER_SIZE);
+		if (len == 0)
+			return (0);
+		i = ft_strchr(buf);
+		printf("len = %zu, i = %d, buf = %s\n", len, i, buf);
 		if (i == 0)
-		{
-			extra = ft_substr(buf, 0, BUFFER_SIZE);
-		}
-		else
-		{
-			comp = substr(buf, 0, i);
-			if (i != BUFFER_SIZE)
-				extra = substr(buf, i, BUFFER_SIZE - i);
-		}
-		if (extra)
-		
+			comp = ft_strjoin(comp, buf);
 	}
+	tiny = ft_substr(buf, 0, i);
+	comp = ft_strjoin(comp, tiny);
+	printf("comp = %s\n", comp);
 	return (comp);
 }
+
+
+int	main(void)
+{
+	int	fd;
+
+	fd = open("test.txt", O_RDONLY);
+	if (fd < 0)
+		printf("file couldn't open\n");
+	//while ()
+	//{
+	printf("next line is: %s\n", get_next_line(fd));
+	//}
+	close(fd);
+}
+
+	// comp = malloc(sizeof(char) * (i + 1));
+	// if (!comp)
+	// 	free (comp);
+	
+	// 	while (i == 0)
+	// 	{
+	// 		extra = ft_substr(buf, 0, BUFFER_SIZE);
+	// 	}
+	// 	else
+	// 	{
+	// 		comp = substr(buf, 0, i);
+	// 		if (i != BUFFER_SIZE)
+	// 			extra = substr(buf, i, BUFFER_SIZE - i);
+	// 	}
+	// 	if (extra)
+		
+	// }
+	// return (comp);
 
 /*
 static 

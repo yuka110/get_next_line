@@ -6,41 +6,56 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 09:47:29 by yitoh         #+#    #+#                 */
-/*   Updated: 2022/12/21 16:51:59 by yitoh         ########   odam.nl         */
+/*   Updated: 2022/12/22 15:54:57 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <stdio.h>
 #include "get_next_line.h"
-//maybe not needed
-char	*ft_strncpy(char *dst, const char *src, size_t len)
+
+size_t	ft_strlen(const char *s)
 {
-	size_t	i;
+	size_t		i;
 
 	i = 0;
-	if (len != 0)
+	while (s[i] != '\0')
+		++i;
+	return (i);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*arr;
+	size_t	i;
+
+	if (start >= ft_strlen(s))
+		len = 0;
+	if (len > ft_strlen(s))
+		len = ft_strlen(s);
+	arr = (char *)malloc((len + 1) * sizeof(char));
+	if (!arr)
+		return (NULL);
+	i = 0;
+	while (i < len && s[start] != '\0')
 	{
-		while (i < len - 1 && src[i] != '\0')
-		{
-			dst[i] = src[i];
-			++i;
-		}
-		dst[i] = '\0';
+		arr[i] = s[start];
+		++i;
+		++start;
 	}
-	return (dst);
+	arr[i] = '\0';
+	return (arr);
 }
 
 //find character c in string s and return index
-size_t	ft_strchr(const char *s, int c)
+size_t	ft_strchr(const char *s)
 {
-	char	a;
 	size_t	i;
 
-	a = (char) c;
 	i = 0;
 	while (i < BUFFER_SIZE)
 	{
-		if (s[i] == a)
+		if (s[i] == '\n')
 			return (i);
 		++i;
 	}
@@ -58,10 +73,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	prelen = ft_strlen(s1);
 	suflen = ft_strlen(s2);
-	arr = malloc((prelen + suflen + 1) * sizeof(char));
 	i = 0;
 	j = 0;
-	if (arr == NULL)
+	arr = malloc((prelen + suflen + 1) * sizeof(char));
+	if (!arr)
 		return (NULL);
 	while (i < prelen)
 	{
