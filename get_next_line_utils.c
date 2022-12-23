@@ -6,7 +6,7 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 09:47:29 by yitoh         #+#    #+#                 */
-/*   Updated: 2022/12/22 15:54:57 by yitoh         ########   odam.nl         */
+/*   Updated: 2022/12/23 20:07:22 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, int len)
 {
 	char	*arr;
-	size_t	i;
+	int		i;
 
 	if (start >= ft_strlen(s))
 		len = 0;
@@ -48,14 +48,15 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 }
 
 //find character c in string s and return index
+// if s[0] == /n or \0, return 1
 size_t	ft_strchr(const char *s)
 {
 	size_t	i;
 
-	i = 0;
-	while (i < BUFFER_SIZE)
+	i = 1;
+	while (i - 1 < BUFFER_SIZE && s[i - 1])
 	{
-		if (s[i] == '\n')
+		if (s[i - 1] == '\n' || s[i - 1] == '\0')
 			return (i);
 		++i;
 	}
@@ -73,6 +74,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	prelen = ft_strlen(s1);
 	suflen = ft_strlen(s2);
+	//printf("prelen = %zu, suflen = %zu\n", prelen, suflen);
 	i = 0;
 	j = 0;
 	arr = malloc((prelen + suflen + 1) * sizeof(char));
@@ -90,4 +92,32 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	arr[i + j] = '\0';
 	return (arr);
+}
+
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	int			i;
+	int			j;
+	char		*arr1;
+	const char	*arr2;
+
+	i = 0;
+	j = i;
+	arr1 = (char *)dst;
+	arr2 = (const char *)src;
+	if (!arr1 && !arr2)
+		return (NULL);
+	if (dst > src)
+	{
+		i = len - 1;
+		j = i;
+		while (i >= 0 && j >= 0)
+			arr1[i--] = arr2[j--];
+	}
+	else
+	{
+		while (i < (int) len && j < (int) len)
+			arr1[i++] = arr2[j++];
+	}
+	return (dst);
 }

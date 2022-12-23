@@ -6,7 +6,7 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 09:47:19 by yitoh         #+#    #+#                 */
-/*   Updated: 2022/12/22 16:41:11 by yitoh         ########   odam.nl         */
+/*   Updated: 2022/12/23 20:23:30 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,34 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
+/*
+dec 23
 
-// char	*more_chr(char	*pre, char *buf)
-// {
-// 	char	*extra;
-// 	char	*joint;
+1. split function -> create find_new_line funciton
+2. return
 
-// 	extra = ft_substr(buf, 0, BUFFER_SIZE);
-// 	joint = ft_strjoin(pre, extra);
-// 	return (joint);
-// }
+comp = ft_
+ free comp somewhere
 
+*/
 
 char	*get_next_line(int fd)
 {
 	static char	buf[BUFFER_SIZE];
 	ssize_t		len;
-	int			i;
+	int	i;
+	static int		j;
 	char		*comp;
 	char		*tiny;
 
 	i = 0;
 	comp = malloc (sizeof(char) * BUFFER_SIZE);
-		if (!comp)
-			free(comp);
+	if (!comp)
+		free(comp);
+	//loop through until we find new line
 	while (i == 0)
 	{
-		len = read(fd, buf, BUFFER_SIZE);
+		len = read(fd, buf + j, (BUFFER_SIZE - j));
 		if (len == 0)
 			return (0);
 		i = ft_strchr(buf);
@@ -50,24 +51,39 @@ char	*get_next_line(int fd)
 		if (i == 0)
 			comp = ft_strjoin(comp, buf);
 	}
-	tiny = ft_substr(buf, 0, i);
+	printf("buf[i] = %c\n", buf[i]);
+	//if we find /n, we will take str before /n
+	tiny = ft_substr(buf, 0, i - 1);
+	printf("tiny = %s\n", tiny);
 	comp = ft_strjoin(comp, tiny);
-	printf("comp = %s\n", comp);
+	free (tiny);
+	// deal buffer index and fill with null
+	ft_memmove(buf, buf + i, len - i);
+	j = len - i;
+	while (len - i < BUFFER_SIZE)
+	{
+		buf[len - i] = '\0';
+		++len;
+	}
+	printf("comp = %s, buf = %s, j = %d\n", comp, buf, j);
 	return (comp);
 }
-
 
 int	main(void)
 {
 	int	fd;
+	char	*next_line;
 
 	fd = open("test.txt", O_RDONLY);
 	if (fd < 0)
 		printf("file couldn't open\n");
-	//while ()
-	//{
-	printf("next line is: %s\n", get_next_line(fd));
-	//}
+	while (get_next_line(fd) != NULL)
+	{
+		next_line = get_next_line(fd);
+		if (!next_line)
+		printf("next line is: %s\n", next_line);
+		free (next_line);
+	}
 	close(fd);
 }
 
