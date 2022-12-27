@@ -6,7 +6,7 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 10:04:48 by yitoh         #+#    #+#                 */
-/*   Updated: 2022/12/22 13:46:16 by yitoh         ########   odam.nl         */
+/*   Updated: 2022/12/27 16:29:16 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,20 @@
 #include "get_next_line.h"
 
 
-// char	*ft_readfile(int fd)
-// {
-// 	int			fd;
-// 	int			count;
-// 	static char	buf[10];
-
-// 	count = 1;
-// 	fd = open("/test.txt", O_RDONLY);
-// 	if (fd < 0)
-// 		return (0);
-// 	while (count = read(fd, buf, 9) > 0)
-// 	{
-// 		buf[count]
-// 	}
-// 	if (check < 0)
-// 		return (0);
-// 	close(fd);
-// 	return
-// }
-
 int	main(void)
 {
 	int	fd;
+	char	*next_line;
 
-	fd = open("/test.txt", O_RDONLY);
+	fd = open("test.txt", O_RDONLY);
 	if (fd < 0)
 		printf("file couldn't open\n");
-	//while ()
-	//{
-		printf("%s\n", get_next_line(fd));
-	//}
+	while (next_line != NULL)
+	{
+		next_line = get_next_line(fd);
+		if (!next_line)
+			free (next_line);
+		printf("next line is: %s\n", next_line);
+	}
 	close(fd);
 }

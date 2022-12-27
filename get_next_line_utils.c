@@ -6,7 +6,7 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 09:47:29 by yitoh         #+#    #+#                 */
-/*   Updated: 2022/12/23 20:07:22 by yitoh         ########   odam.nl         */
+/*   Updated: 2022/12/27 15:46:01 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	prelen = ft_strlen(s1);
 	suflen = ft_strlen(s2);
-	//printf("prelen = %zu, suflen = %zu\n", prelen, suflen);
 	i = 0;
 	j = 0;
 	arr = malloc((prelen + suflen + 1) * sizeof(char));
@@ -121,3 +120,20 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	return (dst);
 }
+
+// void	*ft_calloc(size_t count)
+// {
+// 	char	*p;
+// 	size_t	i;
+
+// 	i = 0;
+// 	p = malloc(count * BUFFER_SIZE);
+// 	if (p == NULL)
+// 		return (NULL);
+// 	while (i < count)
+// 	{
+// 		p[i] = '\0';
+// 		++i;
+// 	}
+// 	return (p);
+// }
