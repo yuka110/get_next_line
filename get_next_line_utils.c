@@ -6,7 +6,7 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 09:47:29 by yitoh         #+#    #+#                 */
-/*   Updated: 2022/12/27 15:46:01 by yitoh         ########   odam.nl         */
+/*   Updated: 2022/12/30 13:18:34 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	*ft_substr(char const *s, unsigned int start, int len)
 
 	if (start >= ft_strlen(s))
 		len = 0;
-	if (len > ft_strlen(s))
-		len = ft_strlen(s);
+	if (len > (int) ft_strlen(s))
+		len = (int) ft_strlen(s);
 	arr = (char *)malloc((len + 1) * sizeof(char));
 	if (!arr)
 		return (NULL);
@@ -54,7 +54,7 @@ size_t	ft_strchr(const char *s)
 	size_t	i;
 
 	i = 1;
-	while (i - 1 < BUFFER_SIZE && s[i - 1])
+	while (i - 1 < BUFFER_SIZE && s)
 	{
 		if (s[i - 1] == '\n' || s[i - 1] == '\0')
 			return (i);
