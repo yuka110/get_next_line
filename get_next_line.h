@@ -6,7 +6,7 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 11:40:12 by yitoh         #+#    #+#                 */
-/*   Updated: 2022/12/27 16:48:49 by yitoh         ########   odam.nl         */
+/*   Updated: 2023/01/08 16:25:15 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 // #ifdef  BUFFER_SIZE
 // #else   
-# define BUFFER_SIZE 13
+# define BUFFER_SIZE 10
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
@@ -23,7 +23,9 @@ size_t	ft_strchr(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 char	*ft_bzero(char *b, size_t len);
-char	*search_new_line(int fd, char *buf, int j, char *comp);
-char	*reset_buf(char *buf, int i);
+//char	*search_new_line(int fd, char *buf, int j, char *comp);
+void    reset_buf(char *buf, int i, int j, ssize_t len);
+char	*joint_last(char *comp, char *buf, int i);
+char	*check(char *comp, char *buf);
 
 #endif
