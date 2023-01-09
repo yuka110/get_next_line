@@ -6,7 +6,7 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 09:47:19 by yitoh         #+#    #+#                 */
-/*   Updated: 2023/01/08 17:02:30 by yitoh         ########   odam.nl         */
+/*   Updated: 2023/01/09 13:48:35 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,38 +81,90 @@ char	*check(char *comp, char *buf)
 // 	return (comp);
 // }
 
+// char	*get_next_line(int fd)
+// {
+// 	static char	buf[BUFFER_SIZE];
+// 	ssize_t		len;
+// 	int	i;
+// 	static int	j;
+// 	char		*comp;
+
+// 	comp = NULL;
+// 	if ((int) ft_strlen(buf) < j)
+// 	{
+// 		j = (int) ft_strlen(buf);
+// 		return (check(comp, buf));
+// 	}
+// 	// comp = search_new_line(fd, buf, comp, j);
+// 	i = 0;
+// 	while (i == 0)
+// 	{
+// 		len = read(fd, buf + j, (BUFFER_SIZE - j));
+// 		if (len < 0)
+// 			return (NULL);
+// 		i = ft_strchr(buf);
+// 		if (i == 0)
+// 		{
+// 			comp = ft_strjoin(comp, buf);
+// 			if (!comp)
+// 				free (comp);
+// 		}
+// 		j = 0;
+// 	}
+// 	comp = joint_last(comp, buf, i);
+// 	j = BUFFER_SIZE - i;
+// 	reset_buf (buf, i, j, len);
+// 	return (comp);
+// }
+
 char	*get_next_line(int fd)
 {
 	static char	buf[BUFFER_SIZE];
 	ssize_t		len;
 	int	i;
 	static int	j;
+	char		*next;
+	char		*tmp;
 	char		*comp;
 
-	comp = NULL;
-	if ((int) ft_strlen(buf) < j)
-	{
-		j = (int) ft_strlen(buf);
-		return (check(comp, buf));
-	}
-	// comp = search_new_line(fd, buf, comp, j);
+	next = NULL;
 	i = 0;
+	if (BUFFER_SIZE <= 0 || fd < 0)
+		return (NULL);
 	while (i == 0)
 	{
 		len = read(fd, buf + j, (BUFFER_SIZE - j));
+		if (len == 0 && next != NULL)
+		{
+			comp = ft_substr(next, 0, ft_strlen(next));
+			if (!comp)
+				return (NULL);
+			free (next);
+			return (comp);
+		}
 		if (len <= 0)
 			return (NULL);
-		i = ft_strchr(buf);
-		if (i == 0)
-		{
-			comp = ft_strjoin(comp, buf);
-			if (!comp)
-				free (comp);
-		}
+		tmp = ft_strjoin(next, buf);
+		if (!tmp)
+			return (NULL);
+		next = ft_strjoin(tmp, "");
+		free (tmp);
+		if (!next)
+			free (tmp);
+		i = ft_strchr(next);
+		if (i != 0)
+			break ;
 		j = 0;
 	}
-	comp = joint_last(comp, buf, i);
-	j = BUFFER_SIZE - i;
-	reset_buf (buf, i, j, len);
+	comp = ft_substr(next, 0, i - 1);
+	if (!comp)
+	{
+		free (next);
+		return (NULL);
+	}
+	j = ft_strlen(next) - (size_t)i;
+	ft_memmove(buf, next + i, j);
+	ft_bzero(buf + j, BUFFER_SIZE - j);
+	free (next);
 	return (comp);
 }

@@ -3,3 +3,5 @@
 *.o
 get_next_line.a
 test.txt
+.vscode/launch.json
+a.out.dSYM/Contents/Info.plist

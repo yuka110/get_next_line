@@ -6,7 +6,7 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 10:04:48 by yitoh         #+#    #+#                 */
-/*   Updated: 2023/01/08 16:49:35 by yitoh         ########   odam.nl         */
+/*   Updated: 2023/01/09 14:29:14 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,17 @@ int	main(void)
 	}
 	close(fd);
 }
+
+
+/*
+buffer size = 3
+1234567
+123
+124142322322
+2322
+
+stash = null + buf1
+stash(buf1) + buf2
+stash(buf1 + buf2) + buf3
+
+*/

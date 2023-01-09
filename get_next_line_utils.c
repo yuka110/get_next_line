@@ -6,7 +6,7 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 09:47:29 by yitoh         #+#    #+#                 */
-/*   Updated: 2023/01/08 13:52:21 by yitoh         ########   odam.nl         */
+/*   Updated: 2023/01/09 13:05:51 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ char	*ft_substr(char const *s, unsigned int start, int len)
 size_t	ft_strchr(const char *s)
 {
 	size_t	i;
+	size_t	strlen;
 
 	i = 1;
-	while (i - 1 < BUFFER_SIZE && s)
+	strlen = ft_strlen(s);
+	while (i - 1 < strlen && s)
 	{
 		if (s[i - 1] == '\n' || s[i - 1] == '\0')
 			return (i);
@@ -81,9 +83,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	{
 		prelen = ft_strlen(s1);
 		arr = malloc((prelen + suflen + 1) * sizeof(char));
-		ft_bzero(arr, prelen + suflen + 1);
 		if (!arr)
 			return (NULL);
+		ft_bzero(arr, prelen + suflen + 1);
 		ft_memmove(arr, s1, prelen);
 		ft_memmove(arr + prelen, s2, suflen);
 	}
