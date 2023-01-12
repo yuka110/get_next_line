@@ -6,7 +6,7 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 09:47:29 by yitoh         #+#    #+#                 */
-/*   Updated: 2023/01/09 13:05:51 by yitoh         ########   odam.nl         */
+/*   Updated: 2023/01/12 15:49:36 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ size_t	ft_strchr(const char *s)
 }
 
 // create new str by connecting s1 and s2
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char		*arr;
 	size_t		prelen;
@@ -89,6 +89,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		ft_memmove(arr, s1, prelen);
 		ft_memmove(arr + prelen, s2, suflen);
 	}
+	free (s1);
 	return (arr);
 }
 
