@@ -6,7 +6,7 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 10:04:48 by yitoh         #+#    #+#                 */
-/*   Updated: 2023/01/09 14:29:14 by yitoh         ########   odam.nl         */
+/*   Updated: 2023/01/13 12:32:33 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-
 int	main(void)
 {
-	int	fd;
+	int		fd;
 	char	*next_line;
 
 	next_line = "\0";
@@ -31,22 +30,8 @@ int	main(void)
 		next_line = get_next_line(fd);
 		if (!next_line)
 			free (next_line);
-		printf("next line is: %s\n", next_line);
+		printf("next line is: %s", next_line);
 		free (next_line);
 	}
 	close(fd);
 }
-
-
-/*
-buffer size = 3
-1234567
-123
-124142322322
-2322
-
-stash = null + buf1
-stash(buf1) + buf2
-stash(buf1 + buf2) + buf3
-
-*/
