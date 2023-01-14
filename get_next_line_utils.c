@@ -6,7 +6,7 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/21 09:47:29 by yitoh         #+#    #+#                 */
-/*   Updated: 2023/01/13 14:02:51 by yitoh         ########   odam.nl         */
+/*   Updated: 2023/01/14 13:17:51 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,16 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	suflen = ft_strlen(s2);
 	if (!s1)
-	{
 		arr = ft_substr(s2, 0, suflen);
-		if (!arr)
-			return (NULL);
-	}
 	else
 	{
 		prelen = ft_strlen(s1);
 		arr = malloc((prelen + suflen + 1) * sizeof(char));
 		if (!arr)
+		{
+			s1 = free_buf(s1);
 			return (NULL);
+		}
 		ft_bzero(arr, prelen + suflen + 1);
 		ft_memmove(arr, s1, prelen);
 		ft_memmove(arr + prelen, s2, suflen);
