@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_next_line.c                                    :+:    :+:            */
+/*   get_next_line_bonus.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/12/21 09:47:19 by yitoh         #+#    #+#                 */
-/*   Updated: 2023/01/15 12:42:17 by yitoh         ########   odam.nl         */
+/*   Created: 2023/01/15 13:23:04 by yitoh         #+#    #+#                 */
+/*   Updated: 2023/01/15 17:24:49 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 //fill str with \0 for len bytes
 char	*ft_bzero(char *b, int len)
@@ -61,7 +61,11 @@ char	*read_me(int fd, char *buf, int i)
 		if (len == 0 && buf)
 			return (buf);
 		if (len <= 0)
-			return (free(buf), NULL);
+		{
+			if (buf != NULL)
+				free(buf);
+			return (NULL);
+		}
 		buf = ft_strjoin(buf, store);
 		if (!buf)
 			break ;
@@ -76,28 +80,40 @@ char	*read_me(int fd, char *buf, int i)
 3. return complete line with substr until \n
 4. taking rest and put them back to buf
 */
-char	*get_next_line(int fd)
+char	*gnl_original(int fd)
 {
-	static char	*buf;
+	static char	*buf[OPEN_MAX];
 	char		*comp;
 	int			i;
 
 	i = 0;
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	buf = read_me(fd, buf, i);
-	if (!buf)
+	buf[fd] = read_me(fd, buf[fd], i);
+	if (!buf[fd])
 		return (NULL);
-	i = ft_strchr(buf);
+	i = ft_strchr(buf[fd]);
 	if (i == 0)
-		i = ft_strlen(buf);
-	comp = ft_substr(buf, 0, i);
+		i = ft_strlen(buf[fd]);
+	comp = ft_substr(buf[fd], 0, i);
 	if (!comp)
 	{
-		free (buf);
-		buf = NULL;
+		free (buf[fd]);
+		buf[fd] = NULL;
 		return (NULL);
 	}
-	buf = reset_buf(buf);
+	buf[fd] = reset_buf(buf[fd]);
 	return (comp);
+}
+
+char	*get_next_line(int fd)
+{
+	char	*handler[OPEN_MAX];
+
+	if (BUFFER_SIZE <= 0 || fd < 0)
+		return (NULL);
+	handler[fd] = gnl_original(fd);
+	if (!handler[fd])
+		return (NULL);
+	return (handler[fd]);
 }

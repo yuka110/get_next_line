@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_next_line_utils.c                              :+:    :+:            */
+/*   get_next_line_utils_bonus.c                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/12/21 09:47:29 by yitoh         #+#    #+#                 */
-/*   Updated: 2023/01/15 17:24:40 by yitoh         ########   odam.nl         */
+/*   Created: 2023/01/15 13:22:33 by yitoh         #+#    #+#                 */
+/*   Updated: 2023/01/15 14:31:38 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_strlen(const char *s)
 {
@@ -81,11 +81,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		prelen = ft_strlen(s1);
 		arr = malloc((prelen + suflen + 1) * sizeof(char));
 		if (!arr)
-		{
-			if (s1 != NULL)
-				free(s1);
-			return (NULL);
-		}
+			return (free(s1), NULL);
 		ft_bzero(arr, prelen + suflen + 1);
 		ft_memmove(arr, s1, prelen);
 		ft_memmove(arr + prelen, s2, suflen);

@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_next_line.h                                    :+:    :+:            */
+/*   get_next_line_bonus.h                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/12/21 11:40:12 by yitoh         #+#    #+#                 */
-/*   Updated: 2023/01/15 12:32:04 by yitoh         ########   odam.nl         */
+/*   Created: 2023/01/15 13:22:18 by yitoh         #+#    #+#                 */
+/*   Updated: 2023/01/15 16:57:32 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 # ifndef  BUFFER_SIZE
 #  define BUFFER_SIZE 100
 # endif
+# define __FD_SETSIZE OPEN_MAX
+# ifndef  OPEN_MAX
+#  define OPEN_MAX 1024
+# endif
 
 char	*get_next_line(int fd);
+char	*gnl_original(int fd);
 int		ft_strlen(const char *s);
 char	*ft_substr(char const *s, int start, int len);
 int		ft_strchr(const char *s);
