@@ -6,13 +6,14 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 13:23:04 by yitoh         #+#    #+#                 */
-/*   Updated: 2023/01/15 17:24:49 by yitoh         ########   odam.nl         */
+/*   Updated: 2023/01/16 07:18:41 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "get_next_line_bonus.h"
 
 //fill str with \0 for len bytes

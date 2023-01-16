@@ -6,19 +6,19 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 13:22:18 by yitoh         #+#    #+#                 */
-/*   Updated: 2023/01/15 16:57:32 by yitoh         ########   odam.nl         */
+/*   Updated: 2023/01/16 07:25:41 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 # ifndef  BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 42
 # endif
-# define __FD_SETSIZE OPEN_MAX
-# ifndef  OPEN_MAX
-#  define OPEN_MAX 1024
-# endif
+// # define __FD_SETSIZE OPEN_MAX
+// # ifndef  OPEN_MAX
+// #  define OPEN_MAX 1024
+// # endif
 
 char	*get_next_line(int fd);
 char	*gnl_original(int fd);

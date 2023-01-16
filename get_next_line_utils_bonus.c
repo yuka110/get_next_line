@@ -6,11 +6,12 @@
 /*   By: yitoh <yitoh@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 13:22:33 by yitoh         #+#    #+#                 */
-/*   Updated: 2023/01/15 14:31:38 by yitoh         ########   odam.nl         */
+/*   Updated: 2023/01/16 07:23:23 by yitoh         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <limits.h>
 #include "get_next_line_bonus.h"
 
 int	ft_strlen(const char *s)

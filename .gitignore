@@ -1,7 +1,7 @@
 .DS_Store
 *.out
 *.o
-get_next_line.a
-test.txt
+*.a
+*.txt
 .vscode/launch.json
 a.out.dSYM/Contents/Info.plist
